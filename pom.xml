@@ -74,7 +74,10 @@
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
         <maven-war-plugin.version>3.3.1</maven-war-plugin.version>
-        <jacoco-maven-plugin>0.8.6</jacoco-maven-plugin>
+        <jacoco.version>0.8.11</jacoco.version>
+        <sonar.coverage.jacoco.xmlReportPaths>
+        ${project.build.directory}/site/jacoco/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
 
         <!-- Docker image -->
         <docker.jib-maven-plugin.version>2.6.0</docker.jib-maven-plugin.version>
@@ -378,22 +381,23 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco-maven-plugin}</version>
+                <version>${jacoco.version}</version>
                 <executions>
                     <execution>
+                        <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
                     <execution>
                         <id>report</id>
-                        <phase>prepare-package</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
+                   </execution>
+                   </executions>
+               </plugin>
 
             <!--Specify the encoding for copying resources-->
             <plugin>
