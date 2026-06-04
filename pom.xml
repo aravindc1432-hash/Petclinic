@@ -63,6 +63,27 @@
 <maven-war-plugin.version>3.3.1</maven-war-plugin.version>
 <jacoco.version>0.8.11</jacoco.version>
 <sonar.coverage.jacoco.xmlReportPaths> ${project.build.directory}/site/jacoco/jacoco.xml </sonar.coverage.jacoco.xmlReportPaths>
+<!-- Nexus Repository -->
+<distributionManagement>
+  <repository>
+    <id>maven-releases</id>
+    <!-- CHANGE HERE by your team Nexus server -->
+    <url>http://3.237.85.47:8081/repository/maven-releases/</url>
+  </repository>
+  <snapshotRepository>
+    <id>maven-snapshots</id>
+    <!-- CHANGE HERE by your team Nexus server -->
+    <url>http://13.126.124.159:8081/repository/maven-releases/</url>
+  </snapshotRepository>
+</distributionManagement>
+<!-- Nexus -->
+<repository>
+  <id>maven-releases</id>
+  <name>maven-releases</name>
+  <url>http://3.237.85.47:8081/repository/maven-releases/</url>
+</repository>
+
+        
 <!--  Docker image  -->
 <docker.jib-maven-plugin.version>2.6.0</docker.jib-maven-plugin.version>
 <docker.image.prefix>springcommunity</docker.image.prefix>
