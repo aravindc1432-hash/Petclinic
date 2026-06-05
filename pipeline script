@@ -26,6 +26,12 @@ pipeline {
                 sh "mvn clean compile"
             }
         }
+        
+        stage("Test-Jacoco") {
+            steps {
+                sh "mvn clean verify"
+            }
+        } 
 
         stage("SonarQube Analysis") {
             steps {
@@ -43,13 +49,7 @@ pipeline {
                 }
             }
         }
-
-        stage("Build") {
-            steps {
-                sh "mvn clean package -DskipTests=true"
-            }
-        }
-
+        
         stage("OWASP Dependency Check") {
             steps {
                 dependencyCheck(
@@ -58,6 +58,12 @@ pipeline {
                 )
 
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+            }
+        }
+        
+        stage("Build") {
+            steps {
+                sh "mvn clean package -DskipTests=true"
             }
         }
 
@@ -77,7 +83,7 @@ pipeline {
             steps {
                 script {
                     sh "docker rm -f petclinic || true"
-                    sh "docker run -d --name petclinic -p 8083:8083 reddy177/petclinic:latest"
+                    sh "docker run -d --name petclinic -p 8083:8080 reddy177/petclinic:latest"
                 }
             }
         }
