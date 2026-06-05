@@ -2,11 +2,9 @@ FROM eclipse-temurin:17-jdk
 
 EXPOSE 8083
 
-ENV APP_HOME_1 /home/app
+WORKDIR /home/app
 
-COPY target/petclinic.war $APP_HOME_1/home/app.war
+COPY target/petclinic.war app.war
 
-WORKDIR $APP-HOME_1
-
-CMD ['java' '-jar' app.war]
+CMD ["java", "-jar", "app.war"]
 
