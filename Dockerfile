@@ -1,10 +1,10 @@
-FROM eclipse-temurin:17-jdk
+FROM tomcat:9.0-jdk17-temurin
 
-EXPOSE 8083
+EXPOSE 8080
 
-WORKDIR /home/app
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-COPY target/petclinic.war app.war
+COPY target/petclinic.war /usr/local/tomcat/webapps/ROOT.war
 
-CMD ["java", "-jar", "app.war"]
+CMD ["catalina.sh", "run"]
 
